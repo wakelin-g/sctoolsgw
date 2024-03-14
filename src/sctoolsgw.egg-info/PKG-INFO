@@ -1,0 +1,23 @@
+Metadata-Version: 2.1
+Name: sctoolsgw
+Version: 0.0.4
+Summary: convenience wrappers around common scanpy functions and workflows
+Author-email: Griffen Wakelin <wakelin@dal.ca>
+Maintainer-email: Griffen Wakelin <wakelin@dal.ca>
+Project-URL: Homepage, https://github.com/wakelin-g/sctoolsgw
+Project-URL: Issues, https://github.com/wakelin-g/sctoolsgw/issues
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Scientific/Engineering :: Medical Science Apps.
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: scanpy>=1.9.5
+Requires-Dist: leidenalg>=0.10.1
+Requires-Dist: python-igraph>=0.10.8
+Requires-Dist: gseapy>=1.1.2
+
+# sctoolsgw
+
+Convenience wrappers around common functions and workflows from the [scanpy](https://github.com/scverse/scanpy) package.

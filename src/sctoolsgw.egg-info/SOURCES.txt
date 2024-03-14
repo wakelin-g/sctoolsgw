@@ -1,0 +1,10 @@
+LICENSE
+README.md
+pyproject.toml
+src/sctoolsgw/__init__.py
+src/sctoolsgw/sctoolsgw.py
+src/sctoolsgw.egg-info/PKG-INFO
+src/sctoolsgw.egg-info/SOURCES.txt
+src/sctoolsgw.egg-info/dependency_links.txt
+src/sctoolsgw.egg-info/requires.txt
+src/sctoolsgw.egg-info/top_level.txt
