@@ -1,6 +1,6 @@
 [project]
 name = "sctoolsgw"
-version = "0.0.4"
+version = "0.0.5"
 authors = [
     { name="Griffen Wakelin", email="wakelin@dal.ca" }
 ]
