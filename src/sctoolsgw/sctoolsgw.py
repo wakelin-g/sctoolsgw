@@ -17,6 +17,8 @@ gene_sets = [
     "Human_Phenotype_Ontology",
 ]
 
+all_gene_sets = gseapy.get_library_name()
+
 
 def barplot_enrichr(
     df: pd.DataFrame,
@@ -37,6 +39,8 @@ def barplot_enrichr(
     :type figsize: tuple
     :param output_file: path to output file (or None to not save as file)
     :type output_file: str
+    :return: enrichr barplot
+    :rtype: :class:`matplotlib.Axes`
     """
     ax = gseapy.plot.barplot(
         df, cutoff=p_val_cutoff, top_term=n_top, figsize=figsize, ofname=output_file
@@ -63,9 +67,12 @@ def run_enrichr(
     :type rank_col: str
     :param p_val_cutoff: filter adjusted p vals above this cutoff
     :type p_val_cutoff: float
+    :return: enrichr results dataframe
+    :rtype: :class:`pd.DataFrame`
     """
-    df = df.loc[:, [rank_col, "Unnamed: 0", "group"]]
-    df = df[df.group == condition]
+    df = reformat_scvi_df(
+        df=df, condition=condition, rank_col=rank_col, p_val_cutof=p_val_cutoff
+    )
     results = gseapy.enrichr(
         gene_list=df["Unnamed: 0"].tolist(),
         gene_sets=gene_sets,
@@ -74,6 +81,14 @@ def run_enrichr(
     )
     results = results.results[results.results["Adjusted P-value"] < p_val_cutoff]
     return results
+
+
+def reformat_scvi_df(
+    df: pd.DataFrame, condition: str, rank_col: str, p_val_cutoff: float
+) -> pd.DataFrame:
+    df = df.loc[:, [rank_col, "Unnamed: 0", "group"]]
+    df = df[df.group == condition]
+    return df
 
 
 def process(adata: sc.AnnData, random_state=None) -> sc.AnnData:
