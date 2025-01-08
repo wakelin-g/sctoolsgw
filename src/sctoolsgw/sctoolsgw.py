@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import scanpy as sc
+from annoy import AnnoyIndex
 
 gene_sets = [
     "GO_Molecular_Function_2023",
@@ -151,3 +152,22 @@ def cluster(adata: sc.AnnData, resolution: [int]) -> sc.AnnData:
         sc.tl.leiden(adata_cp, resolution=res, key_added=f"leiden_{res}")
 
     return adata_cp
+
+
+def get_cluster_centroids(adata, col_name):
+    return np.array(
+        [
+            np.median(
+                adata[adata.obs[col_name] == i].obsm["X_pca"]
+                for i in adata.obs[col_name].cat.categories
+            )
+        ]
+    )
+
+
+def index_cluster_centroids(centroids: np.ndarray):
+    t = AnnoyIndex(50, "angular")
+    for i in range(centroids.shape[0]):
+        t.add_item(i, centroids[i])
+    t.save("centroids.ann")
+    return t
