@@ -1,21 +1,25 @@
+[build-system]
+requires = ["setuptools>64", "setuptools_scm>=8"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "sctoolsgw"
-version = "0.1.0"
+dynamic = ["version"]
 authors = [
     { name="Griffen Wakelin", email="wakelin@dal.ca" }
 ]
 maintainers = [
     { name="Griffen Wakelin", email="wakelin@dal.ca" }
 ]
-description = "convenience wrappers around common scanpy functions and workflows"
+description = "single-cell wrappers and convenience functions for internal use"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 dependencies = [
-    "scanpy>=1.9.5",
-    "leidenalg>=0.10.1",
-    "python-igraph>=0.10.8",
-    "gseapy>=1.1.2",
-    "pydeseq2>=0.4.12",
+    "scanpy>=1.9.1",
+    "leidenalg",
+    "igraph",
+    "gseapy",
+    "pydeseq2>=0.4.1",
     "decoupler>=1.8.0",
     "bbknn>=1.6.0",
 ]
@@ -30,6 +34,11 @@ classifiers = [
 Homepage = "https://github.com/wakelin-g/sctoolsgw"
 Issues = "https://github.com/wakelin-g/sctoolsgw/issues"
 
-[build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
+[tool.setuptools_scm]
+write_to = "src/sctoolsgw/_version.py"
+
+[tool.black]
+line-length = 89
+
+[tool.ruff]
+line-length = 89
